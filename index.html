@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dorkful</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: #e0e0e0; margin: 40px; }
+        .container { max-width: 1000px; margin: auto; background: #2d2d2d; padding: 25px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h2 { color: #00ff41; text-align: center; font-size: 28px; margin-bottom: 25px; }
+        .search-box { text-align: center; margin-bottom: 30px; }
+        input[type="text"] { width: 60%; padding: 12px; border-radius: 6px; border: 1px solid #444; background: #3d3d3d; color: white; outline: none; }
+        button { padding: 12px 25px; background: #00ff41; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; color: #000; transition: 0.3s; }
+        button:hover { background: #00cc33; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { background: #383838; color: #00ff41; text-align: left; padding: 15px; border-bottom: 2px solid #00ff41; }
+        td { padding: 15px; border-bottom: 1px solid #444; font-size: 14px; }
+        code { background: #1a1a1a; padding: 4px 8px; border-radius: 4px; color: #ff9d00; }
+        .btn-search { color: #00ff41; text-decoration: none; border: 1px solid #00ff41; padding: 6px 12px; border-radius: 4px; font-size: 13px; transition: 0.3s; }
+        .btn-search:hover { background: #00ff41; color: #000; }
+        .no-data { text-align: center; color: #888; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Dorkful</h2>
+        
+        <div class="search-box">
+            <form method="POST">
+                <input type="text" name="keyword" placeholder="Hedef site veya anahtar kelime (örn: example.com, gmail)" required>
+                <button type="submit">Dork Üret</button>
+            </form>
+        </div>
+
+        {{if .}}
+        <table>
+            <thead>
+                <tr>
+                    <th>Kategori</th>
+                    <th>Dork</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .}}
+                <tr>
+                    <td><strong>{{.Category}}</strong></td>
+                    <td><code>{{.Dork}}</code></td>
+                    <td><a href="{{.Link}}" target="_blank" class="btn-search">Googleda Ara</a></td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+        {{else}}
+        <p class="no-data">Hedef site veya anahtar kelime girip butona basın.</p>
+        {{end}}
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+site:github.com "BEGIN OPENSSH PRIVATE KEY"
+intitle:\"Webcam\" inurl:WebCam.htm
+inurl:home.htm intitle:1766
+site:login.*.* site:portal.*.*
+site:uat.* * inurl:login
+intitle:\"webcam\" \"login\"
+site:com inurl:invoice
+intext:"user" filetype:php intext:"account" inurl:/admin
+site:*.*.* intitle:"index of" *.pcapng
+intitle:"index of" "configuration.php"
+site:.edu intext:"robotics" inurl:/research
+intitle:index.of /logs.txt
+inurl:"/wp-content/debug.log"
+inurl:adminpanel site:*.* -site:github.com
+site:linkedin.com "@gmail.com"
+site:github.com "@gmail.com"
+site:linkedin.com "Phone:" "+90"
+site:login.*.* | site:portal.*.*
+intitle:"index of" "config.php.txt"
+intitle:"index of" "*robots.txt" site:.edu
+inurl: edu + site: admin
+intitle:"Webcam" inurl:WebCam.htm
+inurl:/admin.php
+filetype:log
+extension:config
+intext:"sql syntax near"
+intitle:\"index of\" intext: \"login.php\"
+extension:bak
+intitle:"Index of /databases"
+intext:"index of" "phpinfo" site:*.insite:.co.in intitle:index of /wp-admin
+site:.co.in intitle:index of /wp-admin
+intitle:index.of./.database
+intitle:"index of" mysql inurl:./db/
+"structure" + ext:sql
+intitle:index.of login.js
+inurl:\"admin/default.aspx\
+intext:SQL syntax & inurl:index.php?=id
+inurl:\"UserLogin/\" intitle:\"Panel\"
+inurl:/default.rdp
+site:linkedin.com "Cyber Security Analyst" "Phone * * *"
