@@ -14,11 +14,15 @@ type DorkResult struct {
 }
 
 func generateDorks(keyword string) []DorkResult {
+
 	templates := map[string][]string{
-		"Sqli":   "inurl:index.php?id=", 
+		"Sqli": {
+			"inurl:index.php?id=",
 			"intext:\"sql syntax near\"",
 			"intext:SQL syntax & inurl:index.php?=id",
-		"Önemli": "extension:config", 
+		},
+		"Onemli": {
+			"extension:config",
 			"extension:bak",
 			"site:github.com \"BEGIN OPENSSH PRIVATE KEY\"",
 			"site:*.*.* intitle:\"index of\" *.pcapng",
@@ -31,12 +35,15 @@ func generateDorks(keyword string) []DorkResult {
 			"filetype:log",
 			"intext:\"index of\" \"phpinfo\" site:*.in",
 			"inurl:/default.rdp",
-		"Osint": "site:linkedin.com \"+90\"", 
+		},
+		"Osint": {
+			"site:linkedin.com \"+90\"",
 			"site:github.com \"@gmail.com\"",
 			"site:linkedin.com \"@gmail.com\"",
 			"site:linkedin.com \"Phone:\" \"+90\"",
 			"site:linkedin.com \"Cyber Security Analyst\" \"Phone * * *\"",
 			"site:.edu intext:\"robotics\" inurl:/research",
+		},
 		"Admin": {
 			"site:login.*.* site:portal.*.*",
 			"site:uat.* * inurl:login",
@@ -56,7 +63,6 @@ func generateDorks(keyword string) []DorkResult {
 			"inurl:home.htm intitle:1766",
 			"intitle:\"webcam\" \"login\"",
 		},
-
 		"Db": {
 			"intitle:\"Index of /databases\"",
 			"intitle:index.of./.database",
@@ -72,7 +78,8 @@ func generateDorks(keyword string) []DorkResult {
 			results = append(results, DorkResult{
 				Category: cat,
 				Dork:     fullDork,
-				Link:     "https://www.google.com/search?q=" + strings.ReplaceAll(fullDork, " ", "+"),
+
+				Link: "https://www.google.com/search?q=" + strings.ReplaceAll(fullDork, " ", "+"),
 			})
 		}
 	}
@@ -87,7 +94,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	tmpl, err := template.ParseFiles("index.html")
 	if err != nil {
-		fmt.Fprintf(w, "HATA: index.html dosyasını bulamadım :(")
+		http.Error(w, "HATA: index.html dosyasını bulamadım :(", http.StatusInternalServerError)
 		return
 	}
 	tmpl.Execute(w, results)
@@ -96,5 +103,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", handler)
 	fmt.Println("Dorkful hazır. Tarayıcıya şunu yaz: http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		fmt.Println("Sunucuyu başlatamadım :( :", err)
+	}
 }
